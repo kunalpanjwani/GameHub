@@ -3,66 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameHub - Logic Puzzles, Reimagined.</title>
+    <title>Game Hub</title>
     <link rel="stylesheet" href="hub.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="navbar-brand">GameHub <span class="navbar-tag">Logic Puzzles</span></a>
-            <div class="navbar-links">
-                <a href="#" class="btn-text">How it works</a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-headline">Logic Puzzles, Reimagined.</h1>
-                <p class="hero-subheading">Dive into handcrafted static puzzle experiences that challenge your mind and sharpen your wit. No distractions, just pure logic.</p>
-                <div class="hero-actions">
-                    <button id="start-playing-btn" class="btn btn-primary">Start Playing</button>
-                    <button id="random-puzzle-btn" class="btn btn-secondary">Random Puzzle</button>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <!-- CSS-driven abstract visual element -->
-                <div class="hero-orb"></div>
-            </div>
-        </div>
+    <header>
+        <h1>Welcome to the Game Hub!</h1>
     </header>
-
-    <main>
-        <section id="puzzle-gallery" class="puzzle-gallery-section">
-            <div class="container">
-                <h2 class="section-title">All Puzzles</h2>
-                <div class="filters">
-                    <!-- Non-functional filter chips for now -->
-                    <span class="filter-chip active" data-filter="all">All</span>
-                    <span class="filter-chip" data-filter="easy">Easy</span>
-                    <span class="filter-chip" data-filter="medium">Medium</span>
-                    <span class="filter-chip" data-filter="hard">Hard</span>
-                </div>
-                <div id="puzzles-container" class="puzzle-grid">
-                    <!-- Puzzle cards will be loaded here by JavaScript -->
-                </div>
-                <div id="error-message" class="error-message hidden">
-                    <h3>Oops! Puzzles Lost in the Chrono-Stream.</h3>
-                    <p>It seems we couldn't load the puzzle library. Please check your connection or try again later.</p>
-                </div>
-            </div>
-        </section>
+    <main id="game-list">
+        <!-- Games will be loaded here by hub.js -->
     </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2023 GameHub. Built as a static GameHub. Powered by vanilla HTML/CSS/JS.</p>
-            <p><a href="https://github.com/example/gamehub" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
-        </div>
-    </footer>
-
-    <script src="hub.js" defer></script>
+    <script src="hub.js"></script>
 </body>
 </html>
