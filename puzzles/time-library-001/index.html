@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronicles of the Time Library: The Paradox of the Missing Tome</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">Chronicles of the Time Library</h1>
+            <h2 class="game-subtitle">The Paradox of the Missing Tome</h2>
+        </header>
+
+        <main class="game-main">
+            <section class="panel story-panel">
+                <h3>The Chrono-Librarian's Oath</h3>
+                <p>Welcome, esteemed Chrono-Librarian. Our sacred Time Library, repository of all historical knowledge, faces a grave threat. A critical tome, detailing a pivotal moment in history, has been misplaced, creating a dangerous paradox that ripples through the timelines. It is your solemn duty to restore order.</p>
+                <p>Using the fragmented clues left behind, you must deduce which Librarian, from which Era, and using which Temporal Device, inadvertently caused this temporal anomaly. The fate of history rests in your hands.</p>
+
+                <h3>Quick Start Guide</h3>
+                <ul class="quick-start">
+                    <li>1. Navigate the three logic grids: Librarian ↔ Era, Librarian ↔ Device, and Era ↔ Device.</li>
+                    <li>2. Each cell represents a possible connection between the row and column entities.</li>
+                    <li>3. Click a cell to cycle its state: <span class="state-indicator true-state small-icon">✔</span> TRUE (confirmed match) &rarr; <span class="state-indicator false-state small-icon">✖</span> FALSE (ruled out) &rarr; UNKNOWN (neutral).</li>
+                    <li>4. Use the clues to logically deduce the TRUE and FALSE connections.</li>
+                    <li>5. Hover over a clue to highlight related entities in the grids.</li>
+                    <li>6. Hover over a cell to highlight its corresponding row and column headers.</li>
+                </ul>
+            </section>
+
+            <section class="panel board-panel">
+                <h3>Connection Board</h3>
+                <div class="legend">
+                    <h4>Connection States:</h4>
+                    <p><span class="state-indicator true-state small-icon">✔</span> TRUE &nbsp; <span class="state-indicator false-state small-icon">✖</span> FALSE &nbsp; <span class="state-indicator unknown-state small-icon">?</span> UNKNOWN</p>
+                    <h4>Feedback:</h4>
+                    <p><span class="feedback-indicator correct-feedback"></span> Correct &nbsp; <span class="feedback-indicator incorrect-feedback"></span> Incorrect</p>
+                </div>
+                <div id="connection-board" class="connection-board">
+                    <div class="grid-legend">
+                        <span class="true-state-legend">✔ TRUE</span>
+                        <span class="false-state-legend">✖ FALSE</span>
+                        <span class="unknown-state-legend">? UNKNOWN</span>
+                    </div>
+                    <div id="grid-librarian-era" class="logic-grid"></div>
+                    <div id="grid-librarian-device" class="logic-grid"></div>
+                    <div id="grid-era-device" class="logic-grid"></div>
+                </div>
+                <div class="board-controls">
+                    <button id="check-solution-btn" class="game-button primary">Check Solution</button>
+                    <button id="reveal-solution-btn" class="game-button tertiary">Reveal Full Solution</button>
+                    <button id="reset-puzzle-btn" class="game-button secondary">Reset Puzzle</button>
+                </div>
+                <div id="feedback-message" class="feedback-message hidden"></div>
+                <div id="solution-summary" class="solution-summary hidden"></div>
+            </section>
+
+            <section class="panel clues-panel">
+                <h3>Clues</h3>
+                <ul id="clues-list" class="clues-list">
+                    <!-- Clues will be loaded here by JavaScript -->
+                </ul>
+                <div class="progress-area">
+                    <h4>Paradox Resolution</h4>
+                    <div class="progress-bar-container">
+                        <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <span id="progress-text">0% Resolved</span>
+                </div>
+                <div class="hint-area">
+                    <button id="show-hint-btn" class="game-button tertiary">Show Hint (3 left)</button>
+                    <p id="hint-text" class="hint-text hidden"></p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="solution-overlay" class="solution-overlay hidden">
+        <div class="solution-content">
+            <h2 id="overlay-title"></h2>
+            <p id="overlay-message"></p>
+            <button id="close-overlay-btn" class="game-button primary">Continue</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>"
