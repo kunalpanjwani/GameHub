@@ -7,8 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const startPlayingBtn = document.getElementById('start-playing-btn');
     const randomPuzzleBtn = document.getElementById('random-puzzle-btn');
     const puzzleGallerySection = document.getElementById('puzzle-gallery');
+    const filterChips = document.querySelectorAll('.filter-chip');
 
     let allPuzzles = [];
+    let activeFilter = 'all';
 
     // Smooth scroll for "Start Playing" button
     if (startPlayingBtn) {
@@ -51,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             puzzleCard.style.setProperty('--animation-order', index); // For staggered animation
 
             const difficultyClass = puzzle.difficulty ? puzzle.difficulty.toLowerCase() : 'unknown';
+            puzzleCard.dataset.difficulty = difficultyClass; // Add data-difficulty attribute
 
             puzzleCard.innerHTML = `
                 <h3 class="puzzle-card-title">${puzzle.title}</h3>
@@ -67,6 +70,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 100 * index); // Adjust delay as needed
         });
     };
+
+    // Filter functionality
+    filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            filterChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            activeFilter = chip.dataset.filter;
+
+            const filteredPuzzles = allPuzzles.filter(puzzle => {
+                return activeFilter === 'all' || puzzle.difficulty.toLowerCase() === activeFilter;
+            });
+            renderPuzzles(filteredPuzzles);
+        });
+    });
 
     // Fetch puzzles
     fetch('puzzles-index.json')
