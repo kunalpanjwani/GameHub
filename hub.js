@@ -1,19 +1,71 @@
 // hub.js
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('puzzles-index.json')
-        .then(response => response.json())
-        .then(puzzles => {
-            const gameList = document.getElementById('game-list');
-            puzzles.forEach(puzzle => {
-                const gameCard = document.createElement('div');
-                gameCard.className = 'game-card';
-                gameCard.innerHTML = `
-                    <h2>${puzzle.name}</h2>
-                    <p>${puzzle.description}</p>
-                    <a href="${puzzle.path}">Play Now</a>
-                `;
-                gameList.appendChild(gameCard);
+    const puzzlesContainer = document.getElementById('puzzles-container');
+    const errorMessage = document.getElementById('error-message');
+    const startPlayingBtn = document.getElementById('start-playing-btn');
+    const randomPuzzleBtn = document.getElementById('random-puzzle-btn');
+    const puzzleGallerySection = document.getElementById('puzzle-gallery');
+
+    let allPuzzles = [];
+
+    // Smooth scroll for "Start Playing" button
+    if (startPlayingBtn) {
+        startPlayingBtn.addEventListener('click', () => {
+            puzzleGallerySection.scrollIntoView({
+                behavior: 'smooth'
             });
+        });
+    }
+
+    // Random Puzzle functionality
+    if (randomPuzzleBtn) {
+        randomPuzzleBtn.addEventListener('click', () => {
+            if (allPuzzles.length > 0) {
+                const randomIndex = Math.floor(Math.random() * allPuzzles.length);
+                window.location.href = allPuzzles[randomIndex].path;
+            } else {
+                alert('No puzzles available to play randomly!');
+            }
+        });
+    }
+
+    fetch('puzzles-index.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
         })
-        .catch(error => console.error('Error loading puzzles:', error));
+        .then(puzzles => {
+            allPuzzles = puzzles;
+            puzzlesContainer.innerHTML = ''; // Clear existing content
+            puzzles.forEach((puzzle, index) => {
+                const puzzleCard = document.createElement('a');
+                puzzleCard.href = puzzle.path;
+                puzzleCard.className = 'puzzle-card';
+                puzzleCard.style.setProperty('--animation-order', index); // For staggered animation
+
+                const difficultyClass = puzzle.difficulty ? puzzle.difficulty.toLowerCase() : 'unknown';
+
+                puzzleCard.innerHTML = `
+                    <h3 class="puzzle-card-title">${puzzle.title}</h3>
+                    <p class="puzzle-card-description">${puzzle.description}</p>
+                    <div class="puzzle-card-meta">
+                        <span class="difficulty-badge ${difficultyClass}">${puzzle.difficulty || 'Unknown'}</span>
+                    </div>
+                `;
+                puzzlesContainer.appendChild(puzzleCard);
+
+                // Trigger fade-in/slide-up animation
+                setTimeout(() => {
+                    puzzleCard.classList.add('show');
+                }, 50 * index); // Staggered delay
+            });
+            errorMessage.classList.add('hidden');
+        })
+        .catch(error => {
+            console.error('Error loading puzzles:', error);
+            puzzlesContainer.innerHTML = ''; // Clear any loading indicators
+            errorMessage.classList.remove('hidden'); // Show error message
+        });
 });
