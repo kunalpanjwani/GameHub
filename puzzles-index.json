@@ -1,7 +1,8 @@
 [
   {
     "id": "time-library-001",
-    "name": "Chronicles of the Time Library",
+    "title": "Chronicles of the Time Library",
+    "difficulty": "Medium"
     "description": "Solve the paradox of the missing tome!",
     "path": "puzzles/time-library-001/index.html"
   }
